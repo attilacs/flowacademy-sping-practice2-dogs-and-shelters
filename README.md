@@ -1,15 +1,15 @@
 ## Flow Academy - Spring gyakorlás 2 - Dogs and Shelters
-## API documentation:
+### API documentation:
 
 <http://localhost:8080/swagger-ui>
 
-## Access DB:
+### Access DB:
 <http://localhost:8080/h2-console>
 - JDBC URL: jdbc:h2:mem:db
 - user: user
 - password: password
 
-## Feladat:
+### Feladat:
 1. DB entitások:
 - Dog
     - id PK bigint
