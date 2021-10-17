@@ -1,6 +1,7 @@
 package hu.flowacademy.dogs.controllers;
 
 import hu.flowacademy.dogs.exceptions.AddressAlreadyExistsException;
+import hu.flowacademy.dogs.exceptions.ChipIdAlreadyExistsException;
 import hu.flowacademy.dogs.models.ErrorModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -29,5 +30,11 @@ public class ErrorController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorModel notFound(NoSuchElementException exception) {
         return new ErrorModel(exception.getMessage());
+    }
+
+    @ExceptionHandler({ChipIdAlreadyExistsException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorModel chipIdAlreadiExists() {
+        return new ErrorModel("A megadott chip Id már létezik!");
     }
 }
