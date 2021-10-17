@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.NoSuchElementException;
+
 @RestControllerAdvice
 public class ErrorController {
 
@@ -21,5 +23,11 @@ public class ErrorController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorModel addressAlreadyExists() {
         return new ErrorModel("A megadott cím már létezik");
+    }
+
+    @ExceptionHandler({NoSuchElementException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorModel notFound(NoSuchElementException exception) {
+        return new ErrorModel(exception.getMessage());
     }
 }
