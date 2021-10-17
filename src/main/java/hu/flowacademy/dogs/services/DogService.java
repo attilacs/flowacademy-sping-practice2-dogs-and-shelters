@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -46,6 +47,10 @@ public class DogService {
 
     public List<Dog> getAllDogs() {
         return dogRepository.findAll();
+    }
+
+    public List<DogResponse> getAllDogsToReturn() {
+        return getAllDogs().stream().map(this::dogToDogResponse).collect(Collectors.toList());
     }
 
     private void checkIfChipIdExists(DogDTO dogDTO) {
