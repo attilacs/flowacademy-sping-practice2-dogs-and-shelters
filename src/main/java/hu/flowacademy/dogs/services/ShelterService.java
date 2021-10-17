@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -44,8 +45,12 @@ public class ShelterService {
         return shelterResponse;
     }
 
-    public List<Shelter> getAllShelters() {
-        return shelterRepository.findAll();
+    public List<ShelterResponse> getAllShelters() {
+        return shelterRepository
+                .findAll()
+                .stream()
+                .map(this::shelterToShelterResponse)
+                .collect(Collectors.toList());
     }
 
 }
