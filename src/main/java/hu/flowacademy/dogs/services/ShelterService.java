@@ -1,6 +1,7 @@
 package hu.flowacademy.dogs.services;
 
 import hu.flowacademy.dogs.dtos.ShelterDTO;
+import hu.flowacademy.dogs.dtos.ShelterResponse;
 import hu.flowacademy.dogs.entities.Shelter;
 import hu.flowacademy.dogs.exceptions.AddressAlreadyExistsException;
 import hu.flowacademy.dogs.repositories.ShelterRepository;
@@ -33,6 +34,14 @@ public class ShelterService {
                 .anyMatch(shelter -> shelter.getAddress().equalsIgnoreCase(address))) {
             throw new AddressAlreadyExistsException();
         }
+    }
+
+    private ShelterResponse shelterToShelterResponse(Shelter shelter) {
+        ShelterResponse shelterResponse = new ShelterResponse();
+        shelterResponse.setId(shelter.getId());
+        shelterResponse.setAddress(shelter.getAddress());
+        shelterResponse.setCapacity(shelter.getCapacity());
+        return shelterResponse;
     }
 
     public List<Shelter> getAllShelters() {
