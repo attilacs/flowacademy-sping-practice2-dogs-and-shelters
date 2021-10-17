@@ -1,6 +1,7 @@
 package hu.flowacademy.dogs.controllers;
 
 import hu.flowacademy.dogs.dtos.ShelterDTO;
+import hu.flowacademy.dogs.dtos.ShelterResponse;
 import hu.flowacademy.dogs.entities.Shelter;
 import hu.flowacademy.dogs.services.ShelterService;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class ShelterController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Shelter addShelter(@RequestBody @Valid ShelterDTO shelterDTO) {
+    public ShelterResponse addShelter(@RequestBody @Valid ShelterDTO shelterDTO) {
         return shelterService.addShelter(shelterDTO);
     }
 }

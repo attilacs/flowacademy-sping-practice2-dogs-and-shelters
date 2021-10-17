@@ -16,7 +16,7 @@ import java.util.List;
 public class ShelterService {
     private final ShelterRepository shelterRepository;
 
-    public Shelter addShelter(ShelterDTO shelterDTO) {
+    public ShelterResponse addShelter(ShelterDTO shelterDTO) {
         String address = shelterDTO.getAddress();
         checkIfAddressAlreadyExists(address);
         Shelter shelter = new Shelter();
@@ -24,7 +24,7 @@ public class ShelterService {
         shelter.setCapacity(shelterDTO.getCapacity());
         shelter.setDogs(new ArrayList<>());
         shelterRepository.save(shelter);
-        return shelter;
+        return shelterToShelterResponse(shelter);
     }
 
     private void checkIfAddressAlreadyExists(String address) {
