@@ -26,4 +26,9 @@ public class ShelterController {
     public List<ShelterResponse> getAllShelters() {
         return shelterService.getAllShelters();
     }
+
+    @GetMapping("{id}")
+    public ShelterResponse getShelter(@PathVariable Long id) {
+        return shelterService.getShelterById(id);
+    }
 }
