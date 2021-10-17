@@ -20,6 +20,6 @@ public class DogService {
         dog.setName(dogDTO.getName());
         dog.setGender(dogDTO.getGender());
         dog.setShelter(shelter);
-        return dog;
+        return dogRepository.save(dog);
     }
 }
