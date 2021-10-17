@@ -4,20 +4,20 @@ import hu.flowacademy.dogs.dtos.ShelterDTO;
 import hu.flowacademy.dogs.dtos.ShelterResponse;
 import hu.flowacademy.dogs.entities.Shelter;
 import hu.flowacademy.dogs.exceptions.AddressAlreadyExistsException;
+import hu.flowacademy.dogs.exceptions.CapacityFullException;
+import hu.flowacademy.dogs.repositories.DogRepository;
 import hu.flowacademy.dogs.repositories.ShelterRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class ShelterService {
     private final ShelterRepository shelterRepository;
+    private final DogRepository dogRepository;
 
     public ShelterResponse addShelter(ShelterDTO shelterDTO) {
         String address = shelterDTO.getAddress();
@@ -65,5 +65,31 @@ public class ShelterService {
 
     public ShelterResponse getShelterById(Long id) {
         return shelterToShelterResponse(findShelterById(id));
+    }
+
+    private void validateShelter(Long id, ShelterDTO shelterDTO) {
+        Shelter oldShelter = findShelterById(id);
+        String oldAddress = oldShelter.getAddress();
+        String newAddress = shelterDTO.getAddress();
+        if (!oldAddress.equalsIgnoreCase(newAddress)) {
+            if (shelterRepository
+                    .findAll()
+                    .stream()
+                    .anyMatch(shelter -> shelter.getAddress().equalsIgnoreCase(newAddress))) {
+                throw new AddressAlreadyExistsException();
+            }
+        }
+        int oldCapacity = shelterDTO.getCapacity();
+        int newCapacity = shelterDTO.getCapacity();
+        if (newCapacity < oldCapacity) {
+            int dogCount = (int) dogRepository
+                    .findAll()
+                    .stream()
+                    .filter(dog -> Objects.equals(dog.getShelter().getId(), id))
+                    .count();
+            if (newCapacity < dogCount) {
+                throw new CapacityFullException();
+            }
+        }
     }
 }
