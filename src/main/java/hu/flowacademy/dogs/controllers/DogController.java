@@ -26,4 +26,9 @@ public class DogController {
     public List<DogResponse> getAllDogs() {
         return dogService.getAllDogsToReturn();
     }
+
+    @GetMapping("{id}")
+    public DogResponse getDogById(@PathVariable Long id) {
+        return dogService.getDogById(id);
+    }
 }
