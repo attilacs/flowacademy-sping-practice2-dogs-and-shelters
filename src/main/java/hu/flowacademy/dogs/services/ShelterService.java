@@ -79,7 +79,7 @@ public class ShelterService {
                 throw new AddressAlreadyExistsException();
             }
         }
-        int oldCapacity = shelterDTO.getCapacity();
+        int oldCapacity = oldShelter.getCapacity();
         int newCapacity = shelterDTO.getCapacity();
         if (newCapacity < oldCapacity) {
             int dogCount = (int) dogRepository
