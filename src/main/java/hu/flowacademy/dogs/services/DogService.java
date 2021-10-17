@@ -4,6 +4,7 @@ import hu.flowacademy.dogs.dtos.DogDTO;
 import hu.flowacademy.dogs.dtos.DogResponse;
 import hu.flowacademy.dogs.entities.Dog;
 import hu.flowacademy.dogs.entities.Shelter;
+import hu.flowacademy.dogs.exceptions.CapacityFullException;
 import hu.flowacademy.dogs.exceptions.ChipIdAlreadyExistsException;
 import hu.flowacademy.dogs.repositories.DogRepository;
 import lombok.AllArgsConstructor;
@@ -58,5 +59,14 @@ public class DogService {
                 .stream()
                 .filter(dog -> Objects.equals(dog.getShelter().getId(), shelterId))
                 .count();
+    }
+
+    private void checkIfShelterIsFull(Long shelterId) {
+        Shelter shelter = shelterService.findShelterById(shelterId);
+        Integer capacity = shelter.getCapacity();
+        int dogCountInShelter = Math.toIntExact(getDogCountByShelterId(shelterId));
+        if (dogCountInShelter >= capacity) {
+            throw new CapacityFullException();
+        }
     }
 }
