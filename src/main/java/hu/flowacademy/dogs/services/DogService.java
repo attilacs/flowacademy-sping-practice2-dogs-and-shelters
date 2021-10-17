@@ -27,7 +27,7 @@ public class DogService {
         return dogToDogResponse(dog);
     }
 
-    public DogResponse dogToDogResponse(Dog dog){
+    public DogResponse dogToDogResponse(Dog dog) {
         DogResponse dogResponse = new DogResponse();
         dogResponse.setId(dog.getId());
         dogResponse.setChipId(dog.getChipId());
