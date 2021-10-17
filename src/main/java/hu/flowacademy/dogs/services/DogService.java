@@ -4,6 +4,7 @@ import hu.flowacademy.dogs.dtos.DogDTO;
 import hu.flowacademy.dogs.dtos.DogResponse;
 import hu.flowacademy.dogs.entities.Dog;
 import hu.flowacademy.dogs.entities.Shelter;
+import hu.flowacademy.dogs.exceptions.ChipIdAlreadyExistsException;
 import hu.flowacademy.dogs.repositories.DogRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,14 @@ public class DogService {
 
     public List<Dog> getAllDogs() {
         return dogRepository.findAll();
+    }
+
+    private void checkIfChipIdExists(DogDTO dogDTO) {
+        String chipId = dogDTO.getChipId();
+        if (getAllDogs()
+                .stream()
+                .anyMatch(dog -> dog.getChipId().equalsIgnoreCase(chipId))) {
+            throw new ChipIdAlreadyExistsException();
+        }
     }
 }
