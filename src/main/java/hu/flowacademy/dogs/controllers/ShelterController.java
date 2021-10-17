@@ -31,4 +31,10 @@ public class ShelterController {
     public ShelterResponse getShelter(@PathVariable Long id) {
         return shelterService.getShelterById(id);
     }
+
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateShelter(@PathVariable Long id, @RequestBody ShelterDTO shelterDTO) {
+        shelterService.updateShelter(id, shelterDTO);
+    }
 }
