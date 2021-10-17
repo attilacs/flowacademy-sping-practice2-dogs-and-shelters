@@ -15,9 +15,10 @@ public class ShelterService {
     private final ShelterRepository shelterRepository;
 
     public Shelter addShelter(ShelterDTO shelterDTO) {
-        checkIfAddressAlreadyExists(shelterDTO.getAddress());
+        String address = shelterDTO.getAddress();
+        checkIfAddressAlreadyExists(address);
         Shelter shelter = new Shelter();
-        shelter.setAddress(shelterDTO.getAddress());
+        shelter.setAddress(address);
         shelter.setCapacity(shelterDTO.getCapacity());
         shelter.setDogs(new ArrayList<>());
         shelterRepository.save(shelter);
