@@ -13,8 +13,9 @@ public class ShelterService {
 
     public Shelter addShelter(ShelterDTO shelterDTO) {
         Shelter shelter = new Shelter();
+        Integer capacity = shelterDTO.getCapacity();
         shelter.setAddress(shelterDTO.getAddress());
-        shelter.setCapacity(shelterDTO.getCapacity());
+        shelter.setCapacity(capacity);
         shelterRepository.save(shelter);
         return shelter;
     }
