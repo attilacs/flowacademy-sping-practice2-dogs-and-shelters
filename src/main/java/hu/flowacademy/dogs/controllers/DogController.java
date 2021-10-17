@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("api/dog")
 @AllArgsConstructor
@@ -15,7 +17,7 @@ public class DogController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DogResponse addDog(@RequestBody DogDTO dogDTO) {
+    public DogResponse addDog(@RequestBody @Valid DogDTO dogDTO) {
         return dogService.addDog(dogDTO);
     }
 }
