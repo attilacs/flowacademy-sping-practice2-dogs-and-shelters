@@ -2,7 +2,7 @@ package hu.flowacademy.dogs.services;
 
 import hu.flowacademy.dogs.dtos.ShelterDTO;
 import hu.flowacademy.dogs.entities.Shelter;
-import hu.flowacademy.dogs.exceptions.DuplicateAddressException;
+import hu.flowacademy.dogs.exceptions.AddressAlreadyExistsException;
 import hu.flowacademy.dogs.repositories.ShelterRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class ShelterService {
                 .findAll()
                 .stream()
                 .anyMatch(shelter -> shelter.getAddress().equalsIgnoreCase(address))) {
-            throw new DuplicateAddressException();
+            throw new AddressAlreadyExistsException();
         }
     }
 
