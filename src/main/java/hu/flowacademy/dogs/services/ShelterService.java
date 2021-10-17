@@ -92,4 +92,13 @@ public class ShelterService {
             }
         }
     }
+
+    public void updateShelter(Long id, ShelterDTO shelterDTO) {
+        validateShelter(id, shelterDTO);
+        Shelter shelterToUpdate = new Shelter();
+        shelterToUpdate.setId(id);
+        shelterToUpdate.setAddress(shelterDTO.getAddress());
+        shelterToUpdate.setCapacity(shelterDTO.getCapacity());
+        shelterRepository.save(shelterToUpdate);
+    }
 }
