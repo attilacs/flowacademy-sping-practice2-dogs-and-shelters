@@ -9,7 +9,7 @@ import javax.validation.constraints.Pattern;
 @Data
 public class DogDTO {
     @NotEmpty
-    @Pattern(regexp = "^[A-Z]{6}-[0-9]{2}]")
+    @Pattern(regexp = "^[A-Z]{6}-[0-9]{2}]$")
     private String chipId;
 
     @NotEmpty
