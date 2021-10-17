@@ -8,6 +8,8 @@ import hu.flowacademy.dogs.repositories.DogRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class DogService {
@@ -33,5 +35,9 @@ public class DogService {
         dogResponse.setGender(dog.getGender());
         dogResponse.setShelter_id(dog.getShelter().getId());
         return dogResponse;
+    }
+
+    public List<Dog> getAllDogs() {
+        return dogRepository.findAll();
     }
 }
