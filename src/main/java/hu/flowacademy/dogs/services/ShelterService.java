@@ -6,6 +6,8 @@ import hu.flowacademy.dogs.repositories.ShelterRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 @AllArgsConstructor
 public class ShelterService {
@@ -15,6 +17,7 @@ public class ShelterService {
         Shelter shelter = new Shelter();
         shelter.setAddress(shelterDTO.getAddress());
         shelter.setCapacity(shelterDTO.getCapacity());
+        shelter.setDogs(new ArrayList<>());
         shelterRepository.save(shelter);
         return shelter;
     }
