@@ -55,7 +55,7 @@ public class ShelterService {
                 .collect(Collectors.toList());
     }
 
-    private Shelter findShelterById(Long id) {
+    public Shelter findShelterById(Long id) {
         Optional<Shelter> shelter = shelterRepository.findById(id);
         if (shelter.isEmpty()) {
             throw new NoSuchElementException("A megadott id-val nem található shelter.");
