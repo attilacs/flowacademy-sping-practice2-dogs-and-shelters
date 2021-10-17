@@ -22,6 +22,7 @@ public class DogService {
     public DogResponse addDog(DogDTO dogDTO) {
         Shelter shelter = shelterService.findShelterById(dogDTO.getShelter_id());
         checkIfChipIdExists(dogDTO);
+        checkIfShelterIsFull(shelter.getId());
         Dog dog = new Dog();
         dog.setChipId(dogDTO.getChipId());
         dog.setName(dogDTO.getName());
