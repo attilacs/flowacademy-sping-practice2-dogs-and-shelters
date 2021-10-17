@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -50,5 +51,12 @@ public class DogService {
                 .anyMatch(dog -> dog.getChipId().equalsIgnoreCase(chipId))) {
             throw new ChipIdAlreadyExistsException();
         }
+    }
+
+    private Long getDogCountByShelterId(Long shelterId) {
+        return getAllDogs()
+                .stream()
+                .filter(dog -> Objects.equals(dog.getShelter().getId(), shelterId))
+                .count();
     }
 }
