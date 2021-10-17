@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -32,6 +33,10 @@ public class ShelterService {
                 .anyMatch(shelter -> shelter.getAddress().equalsIgnoreCase(address))) {
             throw new AddressAlreadyExistsException();
         }
+    }
+
+    public List<Shelter> getAllShelters() {
+        return shelterRepository.findAll();
     }
 
 }
