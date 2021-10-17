@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/dog")
@@ -19,5 +20,10 @@ public class DogController {
     @ResponseStatus(HttpStatus.CREATED)
     public DogResponse addDog(@RequestBody @Valid DogDTO dogDTO) {
         return dogService.addDog(dogDTO);
+    }
+
+    @GetMapping
+    public List<DogResponse> getAllDogs() {
+        return dogService.getAllDogsToReturn();
     }
 }
