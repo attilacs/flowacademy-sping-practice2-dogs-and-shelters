@@ -18,4 +18,7 @@ public class Shelter {
 
     @Column(nullable = false)
     private Integer capacity;
+
+    @OneToMany(mappedBy = "shelter", cascade = CascadeType.ALL)
+    private List<Dog> dogs;
 }

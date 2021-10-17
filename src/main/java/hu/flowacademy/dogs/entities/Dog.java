@@ -20,4 +20,8 @@ public class Dog {
 
     @Column(nullable = false)
     private String gender;
+
+    @ManyToOne
+    @JoinColumn
+    private Shelter shelter;
 }
