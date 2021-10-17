@@ -11,7 +11,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -69,5 +71,13 @@ public class DogService {
         if (dogCountInShelter >= capacity) {
             throw new CapacityFullException();
         }
+    }
+
+    private Dog findDogById(Long id) {
+        Optional<Dog> dog = dogRepository.findById(id);
+        if (dog.isEmpty()) {
+            throw new NoSuchElementException("A megadott id-val nem található kutya.");
+        }
+        return dog.get();
     }
 }
