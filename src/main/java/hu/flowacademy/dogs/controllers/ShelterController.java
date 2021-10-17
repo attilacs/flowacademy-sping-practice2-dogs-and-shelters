@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("api/shelter")
 @AllArgsConstructor
@@ -15,7 +17,7 @@ public class ShelterController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Shelter addShelter(@RequestBody ShelterDTO shelterDTO) {
+    public Shelter addShelter(@RequestBody @Valid ShelterDTO shelterDTO) {
         return shelterService.addShelter(shelterDTO);
     }
 }
