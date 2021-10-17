@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,4 +55,11 @@ public class ShelterService {
                 .collect(Collectors.toList());
     }
 
+    public ShelterResponse getShelterById(Long id) {
+        Optional<Shelter> shelter = shelterRepository.findById(id);
+        if (shelter.isEmpty()) {
+            throw new NoSuchElementException("A megadott id-val nem található shelter.");
+        }
+        return shelterToShelterResponse(shelter.get());
+    }
 }
