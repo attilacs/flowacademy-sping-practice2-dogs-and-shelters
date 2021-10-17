@@ -13,7 +13,7 @@ public class ShelterService {
 
     public Shelter addShelter(ShelterDTO shelterDTO) {
         Shelter shelter = new Shelter();
-        shelter.setAddress(shelter.getAddress());
+        shelter.setAddress(shelterDTO.getAddress());
         shelter.setCapacity(shelterDTO.getCapacity());
         shelterRepository.save(shelter);
         return shelter;
