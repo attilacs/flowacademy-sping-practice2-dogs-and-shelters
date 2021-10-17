@@ -1,6 +1,7 @@
 package hu.flowacademy.dogs.controllers;
 
 import hu.flowacademy.dogs.exceptions.AddressAlreadyExistsException;
+import hu.flowacademy.dogs.exceptions.CapacityFullException;
 import hu.flowacademy.dogs.exceptions.ChipIdAlreadyExistsException;
 import hu.flowacademy.dogs.models.ErrorModel;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,11 @@ public class ErrorController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorModel chipIdAlreadiExists() {
         return new ErrorModel("A megadott chip Id már létezik!");
+    }
+
+    @ExceptionHandler({CapacityFullException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorModel capacityFull() {
+        return new ErrorModel("A megadott shelter megtelt!");
     }
 }
