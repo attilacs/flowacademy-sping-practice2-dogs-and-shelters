@@ -80,4 +80,8 @@ public class DogService {
         }
         return dog.get();
     }
+
+    public DogResponse getDogById(Long id) {
+        return dogToDogResponse(findDogById(id));
+    }
 }
